@@ -15,8 +15,7 @@ __pycache__/
 *.env
 
 # Static and media files
-/staticfiles/
-/media/
+
 
 # Virtual environment
 venv/
@@ -33,8 +32,7 @@ env/
 # Node modules (if using frontend with Django)
 node_modules/
 
-# Migrations (optional)
-**/migrations/**
+
 
 # OS files
 .DS_Store
