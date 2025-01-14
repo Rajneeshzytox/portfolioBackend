@@ -65,7 +65,8 @@ MIDDLEWARE += [
 
 #=================================
 CORS_ALLOWED_ORIGINS = [
-     "http://localhost:5173",  # React frontend URL
+     "http://localhost:5173",  # llocal dev React frontend URL
+     "https://rajneeshzytox.netlify.app", # deployed frontend
 ]
 #=================================
 
