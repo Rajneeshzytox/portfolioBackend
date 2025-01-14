@@ -11,7 +11,7 @@ from .models import *
 # import Serializers
 from .serializers import *
 
-# CRUD PROJECTS
+# ---------------- CRUD PROJECTS ---------------------\
 
 ## 1. Project Create (get, post)
 class ProjectListAPIView(APIView):
@@ -35,7 +35,13 @@ class ProjectListAPIView(APIView):
 ## 2. Project Details (get, put, delete)
 class ProjectDetailAPIView(APIView):
     def get(self, req, pk):
-        pass
+        try:
+            project = Project.objects.get(id=pk)
+            json = ProjectSerializer(project)
+            return Response(json)
+        
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def put(self, req, pk):
         project = Project.objects.get(id=pk)
@@ -54,7 +60,7 @@ class ProjectDetailAPIView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
             # print("Not Found, DELETE Failed!")
-            return Response(status.status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 
@@ -68,21 +74,51 @@ class TagListAPIView(APIView):
         return Response(serialized_data.data)
 
     def post(self, req):
-        pass
+        print("tag\n", req.data)
+        post_data = TagSerializer(data=req.data)
+
+        if post_data.is_valid():
+            post_data.save()
+            return Response(status=status.HTTP_201_CREATED)
+        
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 ## 2. Tag Details 
 class TagDetailAPIView(APIView):
     def get(self, req, pk):
-        pass
+        try:
+            tag = Tag.objects.get(id=pk)
+            tag_data = TagSerializer(tag, many=False)
+            return Response(tag_data.data)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def put(self, req, pk):
-        pass
+        try:
+
+            tags = Tag.objects.get(id=pk)
+            serializer = TagSerializer(tags, data=req.data)
+
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)  
+             
 
     def delete(self, req, pk):
-        pass
+        try:
+            tag = Tag.objects.get(id=pk)
+            tag.delete()
+            # print("Project Deleted Successfully!")
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            # print("Not Found, DELETE Failed!")
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
-
+# -------------------- Categories ------------------
 
 ## 1. Category Create 
 class CategoryListAPIView(APIView):
@@ -94,19 +130,48 @@ class CategoryListAPIView(APIView):
         return Response(serialized_data.data)
 
     def post(self, req):
-        pass
+        print("categories\n", req.data)
+        category = CategorySerializer(data=req.data)
+        
+        if category.is_valid():
+            category.save()
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(status.HTTP_400_BAD_REQUEST)
 
 
 ## 2. Category Details 
 class CategoryDetailAPIView(APIView):
     def get(self, req, pk):
-        pass
+        try:
+            categories = Category.objects.get(id=pk)
+            json = CategorySerializer(categories)
+            return Response(json.data)
+        
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def put(self, req, pk):
-        pass
+        try: 
+
+            category = Category.objects.get(id=pk)
+            serializer = CategorySerializer(category, data=req.data)
+
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, req, pk):
-        pass
+        try:
+            category = Category.objects.get(id=pk)
+            category.delete()
+            # print("Project Deleted Successfully!")
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            # print("Not Found, DELETE Failed!")
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 
@@ -114,30 +179,58 @@ class CategoryDetailAPIView(APIView):
 class StatusListAPIView(APIView):
     def get(self, req):
         status = Status.objects.all()
-
         serialized_data = StatusSerializer(status, many=True)
-
         return Response(serialized_data.data)
 
 
     def post(self, req):
-        pass
-
+        print("status\n", req.data)
+        status_data = StatusSerializer(data=req.data)
+        if status_data.is_valid():
+            status_data.save()
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    
 ## 2. Status Details 
 class StatusDetailAPIView(APIView):
     def get(self, req, pk):
-        pass
+        try:
+            status_data = Status.objects.get(id=pk)
+            json = StatusSerializer(status_data)
+            return Response(json.data)
+        
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def put(self, req, pk):
-        pass
+        try: 
+            status_data = Status.objects.get(id=pk)
+            serializer = StatusSerializer(status_data, data=req.data)
+
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, req, pk):
-        pass
+        try:
+            status_data = Status.objects.get(id=pk)
+            status_data.delete()
+            # print("Project Deleted Successfully!")
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            # print("Not Found, DELETE Failed!")
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 
 
-
+# ============ Home ===========
+def home(req):
+    return render(req, 'home.html')
 
 
 

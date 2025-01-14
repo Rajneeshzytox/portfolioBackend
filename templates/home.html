@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajneesh Portfolio Backend</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            
+        }
+        body{
+            background: linear-gradient(45deg, #33005a, #0e0516);
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            
+            height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        h1,h2,h3,h4,h5,p{
+            opacity: 0.85;
+            font-size: 1rem;
+            line-height: 2;
+        }
+        h1{
+            font-size: 1.9rem;
+            line-height: 1.1;
+        }
+        .circle{
+            position: absolute;
+            height: 20rem;
+            width: 20rem;
+            aspect-ratio: 1;
+            border-radius: 100%;
+            background: linear-gradient(45deg, #2b09a7, #b90793);
+            filter: blur(6rem);
+            opacity: 0.65;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+        .container{
+            display: grid;
+            place-content: center;
+            width: 100vw;
+            height: 100%;
+            overflow: hidden; 
+            position: relative;
+        }
+        .urlSite{
+            padding: 0 0.5rem;
+            background: #000;
+            cursor: pointer;
+            font-size: 0.85rem;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: max-content;
+           border-radius: 0.25rem;
+        }
+        .urlSite a{
+            color: white;
+            overflow: hidden;
+            background-clip: text;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .urlSite:hover .box{
+            left: 120%;
+        }
+        .box{
+            transform: skew(-45deg);
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 100%;
+            height: 100%;
+            mix-blend-mode: multiply;
+            background: linear-gradient(45deg,hsl(220, 50%, 50%), hsl(271, 50%, 50%),hsl(290, 50%, 50%), hsl(313, 89%, 54%));
+            transition: 2s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <span class="circle"></span>
+        <H1>HI 👋, I'm Rajneesh,</H1>
+        <h3>This is Backend Server for my portfolio site</h3>
+        <h3>Visit my portfolio Site <br/>
+            <span class="urlSite">
+                🔗 <a href="#">portfolio</a>
+                <span class="box"></span>
+            </span>
+        </h3>
+    </div>
+    <script>
+        const circle = document.querySelector('.circle');
+
+        window.addEventListener('mousemove', (e)=>{
+            circle.style.left = e.clientX + "px";
+            circle.style.top = e.clientY + "px";
+            
+        })
+
+    </script>
+</body>
+</html>
