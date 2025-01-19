@@ -29,9 +29,9 @@ class Project(models.Model):
     demo = models.URLField(blank=True, null=True)
     site = models.URLField(blank=True, null=True)
 
-    categories = models.ManyToManyField(Category, blank=True, null=True, related_name="projects")
-    tags = models.ManyToManyField(Tag, blank=True, null=True, related_name="projects")
-    status = models.ForeignKey(Status, on_delete=models.SET_NULL, null=True, blank=True)
+    categories = models.ManyToManyField(Category, blank=True, related_name="projects")
+    tags = models.ManyToManyField(Tag, blank=True, related_name="projects")
+    status = models.ForeignKey(Status, on_delete=models.SET_NULL, blank=True, null=True, related_name="projects")
 
 
     def __str__(self):
