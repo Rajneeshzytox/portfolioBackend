@@ -1,7 +1,8 @@
 from django.contrib import admin
-from . import models
-# Register your models here.
-admin.site.register(models.Project)
-admin.site.register(models.Tag)
-admin.site.register(models.Category)
-admin.site.register(models.Status)
+from django.apps import apps
+from .models import *  
+
+# Automatically register all models in the app
+app = apps.get_app_config('API')  
+for model in app.get_models():
+    admin.site.register(model)
