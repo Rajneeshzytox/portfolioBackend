@@ -14,6 +14,7 @@ from .serializers import *
 
 from django.http import HttpResponse
 from django.core.management import call_command
+from django.contrib.auth import get_user_model
 
 def run_migrations(request):
     call_command("migrate")
