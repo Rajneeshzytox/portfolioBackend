@@ -11,26 +11,26 @@ from .models import *
 # import Serializers projects
 from .serializers import *
 
+############ FORCE SHELL COMMAND RUN
+# from django.http import HttpResponse
+# from django.core.management import call_command
+# from django.contrib.auth import get_user_model
 
-from django.http import HttpResponse
-from django.core.management import call_command
-from django.contrib.auth import get_user_model
+# def run_migrations(request):
+#     call_command("migrate")
+#     return HttpResponse("Migrations Applied!")
 
-def run_migrations(request):
-    call_command("migrate")
-    return HttpResponse("Migrations Applied!")
-
-def create_superuser(request):
-    User = get_user_model()
-    if not User.objects.filter(username="rajneesh").exists():
-        User.objects.create_superuser(
-            username="rajneesh",
-            email="rajneesh@admin.com",
-            password="admin123" 
-        )
-        return HttpResponse("Superuser Created! Use username: 'admin' and password: 'admin123'.")
-    else:
-        return HttpResponse("Superuser already exists.")
+# def create_superuser(request):
+#     User = get_user_model()
+#     if not User.objects.filter(username="rajneesh").exists():
+#         User.objects.create_superuser(
+#             username="rajneesh",
+#             email="rajneesh@admin.com",
+#             password="admin123" 
+#         )
+#         return HttpResponse("Superuser Created! Use username: 'admin' and password: 'admin123'.")
+#     else:
+#         return HttpResponse("Superuser already exists.")
 
 # HOMEM DATA FRONTEND
 from .models import SocialLink, Experience, Education, AwardAndHonor, Skill, Resume, ResumeData
