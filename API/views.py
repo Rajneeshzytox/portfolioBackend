@@ -20,8 +20,16 @@ def run_migrations(request):
     return HttpResponse("Migrations Applied!")
 
 def create_superuser(request):
-    call_command("createsuperuser", interactive=False, username="rajneeshzytox", email="rajneesh@zytox.com")
-    return HttpResponse("Superuser Created! Change password using Django admin.")
+    User = get_user_model()
+    if not User.objects.filter(username="rajneesh").exists():
+        User.objects.create_superuser(
+            username="rajneesh",
+            email="rajneesh@admin.com",
+            password="admin123" 
+        )
+        return HttpResponse("Superuser Created! Use username: 'admin' and password: 'admin123'.")
+    else:
+        return HttpResponse("Superuser already exists.")
 
 # HOMEM DATA FRONTEND
 from .models import SocialLink, Experience, Education, AwardAndHonor, Skill, Resume, ResumeData
