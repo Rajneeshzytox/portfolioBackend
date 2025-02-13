@@ -7,6 +7,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', home, name="home"),
 
+    path("run-migrations/", run_migrations),  # Run this to apply migrations
+    path("create-superuser/", create_superuser),  # Run this to create an admin user
+
     path('api/projects/', ProjectListAPIView.as_view(), name="Project-list"),
     path('api/projects/<int:pk>/', ProjectDetailAPIView.as_view(), name="Project-detail"),
     

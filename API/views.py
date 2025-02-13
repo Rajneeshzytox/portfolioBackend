@@ -12,6 +12,17 @@ from .models import *
 from .serializers import *
 
 
+from django.http import HttpResponse
+from django.core.management import call_command
+
+def run_migrations(request):
+    call_command("migrate")
+    return HttpResponse("Migrations Applied!")
+
+def create_superuser(request):
+    call_command("createsuperuser", interactive=False, username="rajneeshzytox", email="rajneesh@zytox.com")
+    return HttpResponse("Superuser Created! Change password using Django admin.")
+
 # HOMEM DATA FRONTEND
 from .models import SocialLink, Experience, Education, AwardAndHonor, Skill, Resume, ResumeData
 from .serializers import (
