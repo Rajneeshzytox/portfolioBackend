@@ -1,0 +1,3 @@
+startCommand: |
+  python manage.py migrate &&
+  gunicorn your_project.wsgi:application
